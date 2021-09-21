@@ -1,5 +1,5 @@
 # 一、简介
-第44届国际计算机学会信息检索大会（The 44rd International ACM SIGIR Conference on Research and Development in Information Retrieval, SIGIR 2021）计划于今年7月11日-7月15日以线上会议形式召开。[这次会议](https://sigir.org/sigir2021/accepted-papers/)  共收到720篇长文和526篇短文投稿，有151篇长文和145篇短文被录用，录用率约为21%和27%。  
+第44届国际计算机学会信息检索大会（The 44rd International ACM SIGIR Conference on Research and Development in Information Retrieval, SIGIR 2021）于今年7月11日-7月15日以线上会议形式召开。[这次会议](https://sigir.org/sigir2021/accepted-papers/)  共收到720篇长文和526篇短文投稿，有151篇长文和145篇短文被录用，录用率约为21%和27%。  
 ![word_cloud](img.png)   
 从词云图看今年SIGIR推荐系统的研究热点：根据长文和短文的标题绘制如下词云图，可以看到今年研究方向主要集中在Recommendation和Retrieval两个方向，也包括Summarization、Conversations等NLP方向；主要任务包括：Ranking、Cross-domain、Multi-Model/Behavior、Few-Shot、User modeling、Personalization等；热门技术包括：Neural Networks、Knowledge Graph、GNN、Attention、Meta Learning等，其中基于Graph的一类方法依旧是今年的研究热点。  
 目前Graph算法主要有以下应用：
