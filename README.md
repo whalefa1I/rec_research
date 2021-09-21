@@ -1,22 +1,26 @@
-![word_cloud](img.png) 
 第44届国际计算机学会信息检索大会（The 44rd International ACM SIGIR Conference on Research and Development in Information Retrieval, SIGIR 2021）计划于今年7月11日-7月15日以线上会议形式召开。[这次会议](https://sigir.org/sigir2021/accepted-papers/)  共收到720篇长文和526篇短文投稿，有151篇长文和145篇短文被录用，录用率约为21%和27%。  
-从词云图看今年SIGIR推荐系统的研究热点：根据长文和短文的标题绘制如下词云图，可以看到今年研究方向主要集中在Recommendation和Retrieval两个方向，也包括Summarization、Conversations等NLP方向；主要任务包括：Ranking、Cross-domain、Multi-Model/Behavior、Few-Shot、User modeling、Personalization等；热门技术包括：Neural Networks、Knowledge Graph、GNN、Attention、Meta Learning等，其中基于Graph的一类方法依旧是今年的研究热点。
+![word_cloud](img.png)   
+从词云图看今年SIGIR推荐系统的研究热点：根据长文和短文的标题绘制如下词云图，可以看到今年研究方向主要集中在Recommendation和Retrieval两个方向，也包括Summarization、Conversations等NLP方向；主要任务包括：Ranking、Cross-domain、Multi-Model/Behavior、Few-Shot、User modeling、Personalization等；热门技术包括：Neural Networks、Knowledge Graph、GNN、Attention、Meta Learning等，其中基于Graph的一类方法依旧是今年的研究热点。  
+目前Graph算法主要有以下应用：
+* 节点分类（node classification）  
+* 图分类（graph classification）  
+* 边预测（link prediction）  
+* 图的嵌入表示（graph embedding）  
+推荐系统由GCN到可以准实时应用的DeepWalk、Line、Node2Vec等技术，目前被广泛在各大互联网推荐系统架构中。  
 
-《Billion-scale Commodity Embedding for E-commerce Recommendation in Alibaba》
-====
-节点分类（node classification）  
-图分类（graph classification）  
-边预测（link prediction）  
-图的嵌入表示（graph embedding）  
-从GCN
-到DeepWalk、Line、Node2Vec  
-
-
+    
 |Algorithm	|Neighbor Expansion	|Optimization	
 |------|----|----|
 |DeepWalk 	|BFS					|hierarchical softmax 
 |Line 		|Random				|negative sampling
-|Node2Vec 	|BFS + DFS			|negative sampling
+|Node2Vec 	|BFS + DFS			|negative sampling    
+    
+以下用2018年阿里巴巴在推荐系统中运用的Graph embedding为例对推荐系统中的Graph技术进行介绍。  
+
+
+《Billion-scale Commodity Embedding for E-commerce Recommendation in Alibaba》
+====
+
 ## 一、图形构建
 
 ### 1、通过用户行为构建item graph：
@@ -31,7 +35,8 @@
 	
 
 ![user_behavior](user_behavior.png)  
-如上图（a）用户U1具有***一个***有向商品回会话：`D->A->B`，用户U2具有***两个***有向商品会话：`B->E` & `D->E->F`，同理用户U3有***两个***有向商品会话``E->C->B``    
+如上图（a）用户U1具有***一个***有向商品回会话：`D->A->B`，用户U2具有***两个***有向商品会话：`B->E` & `D->E->F`，同理用户U3有***两个***有向商品会话``E->C->B``   
+
 ![item_graph](item_graph.png)    
 随即根据图（a）的用户行为可获得图（b）的有向图
 	
@@ -49,7 +54,7 @@
 
 ### 4、Enhanced Graph Embedding with Side Information （EGES）：
 GES中的一个问题是针对每个item，没有考虑side infomation的权重，EGES就是让不同类型的side info具有不同的权重，最后得到一个加权平均的方法来aggragated 这些embedding
-![item_graph](GES.png)  
+![GES](GES.png)  
 由于每个item对其不同side info的权重不一样，所以需要额外大小为v*(n + 1)的矩阵来表示每个item对便捷信息的权值。其中V是item的个数，n是side info的个数，+1是考虑item自身的权重。  
 ## 二、实验结果
 ### 1、离线测评
@@ -77,6 +82,8 @@ GES中的一个问题是针对每个item，没有考虑side infomation的权重�
 * 一方面，离散特征的不同取值在数据中的出现频次相差较大，对于高频词的特征取值，应当取更长长度的embedding向量表示更丰富的信息，对于低频次的特征取值，如果embedding过长，则容易导致过拟合。
 * 相较于动态的embedding长度，定长的方式储存和计算的成本较高。  
 当前的对于不定长的embbedding处理方式主要有两类：一类是基于规则的方法，对于频次高的特征，设置更长的embedding长度，对于频次较低的特征，设置较低的embedding长度。这种方式的主要问题的依赖于人工经验。另一类方法是基于神经架构搜索，这种方法是从候选的embedding长度中寻找每个特征最适合的长度，但候选长度往往被限制在有限的范围内。同时，上述两种方法都需要从头开始训练来寻找最适合的长度，不利于特征向量的热启动。
+
+
 
 
 
