@@ -1,4 +1,4 @@
-![word_cloud](C:\Users\Administrator\Desktop\rec\Graph-Embedding-Algorithms-main\img.png) 
+![word_cloud](img.png) 
 第44届国际计算机学会信息检索大会（The 44rd International ACM SIGIR Conference on Research and Development in Information Retrieval, SIGIR 2021）计划于今年7月11日-7月15日以线上会议形式召开。[这次会议](https://sigir.org/sigir2021/accepted-papers/)  共收到720篇长文和526篇短文投稿，有151篇长文和145篇短文被录用，录用率约为21%和27%。  
 从词云图看今年SIGIR推荐系统的研究热点：根据长文和短文的标题绘制如下词云图，可以看到今年研究方向主要集中在Recommendation和Retrieval两个方向，也包括Summarization、Conversations等NLP方向；主要任务包括：Ranking、Cross-domain、Multi-Model/Behavior、Few-Shot、User modeling、Personalization等；热门技术包括：Neural Networks、Knowledge Graph、GNN、Attention、Meta Learning等，其中基于Graph的一类方法依旧是今年的研究热点。
 
@@ -30,9 +30,9 @@
 	* 商家频繁修改商品信息的，造成前后id不一致的，需要移除。
 	
 
-![user_behavior](C:\Users\Administrator\Desktop\rec\Graph-Embedding-Algorithms-main\user_behavior.png)  
+![user_behavior](user_behavior.png)  
 如上图（a）用户U1具有***一个***有向商品回会话：`D->A->B`，用户U2具有***两个***有向商品会话：`B->E` & `D->E->F`，同理用户U3有***两个***有向商品会话``E->C->B``    
-![item_graph](C:\Users\Administrator\Desktop\rec\Graph-Embedding-Algorithms-main\item_graph.png)    
+![item_graph](item_graph.png)    
 随即根据图（a）的用户行为可获得图（b）的有向图
 	
 ### 2、Base Graph Embedding（BGE）：在带权有向图上进行随机游走
@@ -49,7 +49,7 @@
 
 ### 4、Enhanced Graph Embedding with Side Information （EGES）：
 GES中的一个问题是针对每个item，没有考虑side infomation的权重，EGES就是让不同类型的side info具有不同的权重，最后得到一个加权平均的方法来aggragated 这些embedding
-![item_graph](C:\Users\Administrator\Desktop\rec\Graph-Embedding-Algorithms-main\EGES.png)  
+![item_graph](GES.png)  
 由于每个item对其不同side info的权重不一样，所以需要额外大小为v*(n + 1)的矩阵来表示每个item对便捷信息的权值。其中V是item的个数，n是side info的个数，+1是考虑item自身的权重。  
 ## 二、实验结果
 ### 1、离线测评
@@ -58,14 +58,14 @@ GES中的一个问题是针对每个item，没有考虑side infomation的权重�
 * Taobao移动端APP抽取  
 	对于Amazon数据集，item graph可以从“共同购买（co-purchasing）”的关系中被构建（在提供的数据中由also_bought表示），side info使用了三种类型：类目（category），子类目(sub-category)以及品牌。  
   	对于Taobao数据集，item graph通过第随机游走方法构建。注意，为了效率和效果，在Taobao真实生产环境中，使用了12种类型的side information，包括：零售商（retailer）, 品牌（brand）, 购买级别（purchase level）, 年代（age）, 适用性别（gender）, 风格（style）, 等等。
-![dataset](C:\Users\Administrator\Desktop\rec\Graph-Embedding-Algorithms-main\dataset.png)    
+![dataset](dataset.png)    
   上表反映了两个数据集的稀疏性大于99%。  
   
 #### b、结果分析  
-![result](C:\Users\Administrator\Desktop\rec\Graph-Embedding-Algorithms-main\result.png)  
+![result](result.png)  
 上表反映了GES和EGES在两个数据集上都要好于BGE和Line的相关算法。在Taobao数据集上提高更加显著，说明更多类型的有效的side info可以提供更多信息，聚合side info对于graph embedding更加有效，准确率可以通过多个side info的加权聚合而提升。
 ### 2、AB test
-![AB test](C:\Users\Administrator\Desktop\rec\Graph-Embedding-Algorithms-main\ABtest.png)  
+![AB test](ABtest.png)  
 上图是淘宝在2017年双十一7天的CTR 进行的A/B Test结果，其中Base方法表示item-based的CF方法，在graph embedding之前被广泛应用于淘宝推荐系统中。  
 从上图可以看到EGES和GES在CTR的效果要好于BGE和Base方法，这表示graph embedding聚合的side info带来的积极效果。EGES相较GES具有不错的效果，说明加权聚合的计算方式要好于平均聚合。  
 ### 3、冷启动
